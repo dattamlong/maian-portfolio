@@ -19,37 +19,66 @@ const item = {
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      {/* subtle grain texture */}
+    <section
+      id="top"
+      className="relative flex min-h-[92vh] items-center overflow-hidden"
+    >
+      {/* subtle grain */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.045] mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.04] mix-blend-multiply"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
-      {/* ambient warmth */}
-      <div
+
+      {/* full-bleed portrait blended into background */}
+      <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-40 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle at center, var(--gold-soft), transparent 65%)",
-        }}
-      />
-      <div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-y-0 right-0 z-0 w-full lg:w-[60%]"
+      >
+        <Image
+          src="/hero-portrait.jpg"
+          alt={`${profile.name} — ${profile.role}`}
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 60vw"
+          className="object-cover object-center"
+        />
+        {/* fade edges into cream (nhẹ hơn để ảnh rõ) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, #f5f1e5 0%, rgba(245,241,229,0.7) 8%, rgba(245,241,229,0.12) 26%, rgba(245,241,229,0) 44%), linear-gradient(to top, #f5f1e5 0%, rgba(245,241,229,0) 10%), linear-gradient(to bottom, rgba(245,241,229,0.5) 0%, rgba(245,241,229,0) 9%)",
+          }}
+        />
+        {/* extra veil on mobile for text legibility */}
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{ background: "rgba(245,241,229,0.5)" }}
+        />
+      </motion.div>
+
+      {/* soft accents */}
+      <span
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-40 h-[30rem] w-[30rem] rounded-full opacity-50 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle at center, var(--accent-soft), transparent 65%)",
-        }}
+        className="blob left-[-4%] top-24 z-0 h-72 w-72"
+        style={{ background: "var(--gold-soft)" }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-content grid-cols-1 items-center gap-14 px-6 pb-24 pt-32 sm:pt-40 lg:grid-cols-[1.1fr_0.9fr] lg:pb-32">
-        {/* left copy */}
-        <motion.div variants={container} initial="hidden" animate="show">
+      {/* content */}
+      <div className="relative z-10 mx-auto w-full max-w-content px-6 py-28">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="max-w-xl"
+        >
           <motion.div variants={item} className="flex items-center gap-3">
             <span className="gold-rule" />
             <p className="text-sm font-medium tracking-wide text-muted">
@@ -68,7 +97,7 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="mt-7 max-w-md text-lg leading-relaxed text-muted"
+            className="mt-6 max-w-md text-lg leading-relaxed text-muted"
           >
             {profile.tagline}
           </motion.p>
@@ -84,7 +113,7 @@ export default function Hero() {
               href={profile.cvUrl}
               target={profile.cvUrl.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="rounded-full border border-accent/30 bg-surface px-7 py-3 text-sm font-medium text-accent-ink transition-colors hover:border-accent"
+              className="glass rounded-full px-7 py-3 text-sm font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
             >
               Tải CV
             </a>
@@ -92,7 +121,7 @@ export default function Hero() {
 
           <motion.div
             variants={item}
-            className="mt-12 flex flex-wrap gap-x-10 gap-y-4"
+            className="glass mt-12 inline-flex flex-wrap gap-x-10 gap-y-4 rounded-2xl px-7 py-5"
           >
             {stats.slice(0, 3).map((s) => (
               <div key={s.label}>
@@ -105,34 +134,6 @@ export default function Hero() {
               </div>
             ))}
           </motion.div>
-        </motion.div>
-
-        {/* right visual: arch portrait + floating cards */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto hidden w-full max-w-sm lg:block"
-        >
-          {/* gold ring accent */}
-          <div
-            aria-hidden
-            className="absolute -right-4 -top-4 h-24 w-24 rounded-full border-2 border-gold/60"
-          />
-
-          {/* arch frame */}
-          <div className="arch relative overflow-hidden border border-line bg-surface p-3 shadow-soft">
-            <div className="arch relative aspect-[3/4] overflow-hidden">
-              <Image
-                src="/hero-portrait.jpg"
-                alt={`${profile.name} — ${profile.role}`}
-                fill
-                priority
-                sizes="384px"
-                className="object-cover"
-              />
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

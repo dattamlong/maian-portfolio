@@ -20,7 +20,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         solid
-          ? "border-b border-line bg-paper/85 backdrop-blur-md"
+          ? "glass-nav border-b border-line"
           : "border-b border-transparent"
       }`}
     >

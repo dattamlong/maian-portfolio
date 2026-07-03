@@ -59,7 +59,7 @@ export default function Skills() {
           const Icon = skillIcons[s.key];
           return (
             <Reveal key={s.key} delay={(i % 5) * 0.06} className={skillOffset[i]}>
-              <div className="group flex h-full flex-col items-center rounded-[1.6rem] border border-line bg-surface p-6 text-center shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+              <div className="glass group flex h-full flex-col items-center rounded-[1.6rem] p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent-soft text-accent transition-colors group-hover:bg-accent group-hover:text-paper">
                   <Icon className="h-6 w-6" strokeWidth={1.6} />
                 </span>
@@ -86,7 +86,7 @@ export default function Skills() {
           const Icon = toolIcons[t.key];
           return (
             <Reveal key={t.key} delay={(i % 6) * 0.05} className={toolOffset[i]}>
-              <div className="group flex h-full flex-col items-center rounded-[1.6rem] border border-line bg-surface p-5 text-center shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+              <div className="glass group flex h-full flex-col items-center rounded-[1.6rem] p-5 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-soft text-gold-deep transition-colors group-hover:bg-gold group-hover:text-accent-ink">
                   <Icon className="h-5 w-5" strokeWidth={1.6} />
                 </span>
@@ -102,7 +102,7 @@ export default function Skills() {
 
       {/* languages */}
       <Reveal>
-        <div className="mx-auto mt-16 flex max-w-md items-center justify-center gap-3 rounded-full border border-line bg-surface px-6 py-3.5 shadow-card">
+        <div className="glass mx-auto mt-16 flex max-w-md items-center justify-center gap-3 rounded-full px-6 py-3.5">
           <LuGlobe className="h-5 w-5 text-accent" strokeWidth={1.6} />
           {languages.map((l) => (
             <span key={l.name} className="text-sm text-muted">

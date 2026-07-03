@@ -16,7 +16,7 @@ export default function Experience() {
       subtitle="Hành trình làm nghề và những gì mình đã đóng góp."
     >
       <Reveal>
-        <div className="mx-auto grid max-w-5xl overflow-hidden rounded-[2rem] border border-line bg-surface shadow-soft lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="glass mx-auto grid max-w-5xl overflow-hidden rounded-[2rem] shadow-soft lg:grid-cols-[0.82fr_1.18fr]">
           {/* left identity panel */}
           <div
             className="relative flex flex-col p-9 sm:p-11"

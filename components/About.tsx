@@ -6,9 +6,19 @@ export default function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-20 border-y border-line bg-soft py-20 sm:py-28"
+      className="relative overflow-hidden scroll-mt-20 border-y border-line bg-soft py-20 sm:py-28"
     >
-      <div className="mx-auto grid w-full max-w-content grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
+      <span
+        aria-hidden
+        className="blob left-[-5%] top-6 h-72 w-72"
+        style={{ background: "var(--gold-soft)" }}
+      />
+      <span
+        aria-hidden
+        className="blob right-[-4%] bottom-6 h-64 w-64"
+        style={{ background: "var(--accent-soft)" }}
+      />
+      <div className="relative z-10 mx-auto grid w-full max-w-content grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
         {/* arch photo placeholder */}
         <Reveal>
           <div className="relative mx-auto w-full max-w-sm">
@@ -16,7 +26,7 @@ export default function About() {
               aria-hidden
               className="absolute -left-5 -top-5 h-24 w-24 rounded-full border-2 border-gold/50"
             />
-            <div className="arch relative overflow-hidden border border-line bg-surface p-3 shadow-soft">
+            <div className="glass arch relative overflow-hidden p-3 shadow-soft">
               <div className="arch relative aspect-[3/4] overflow-hidden">
                 <Image
                   src="/about-portrait.jpg"
@@ -47,7 +57,7 @@ export default function About() {
             {badges.map((b) => (
               <span
                 key={b.label}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-accent-ink"
+                className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-accent-ink"
               >
                 <span aria-hidden>{b.icon}</span>
                 {b.label}

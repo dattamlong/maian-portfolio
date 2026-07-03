@@ -5,24 +5,34 @@ export default function Section({
   id,
   label,
   title,
+  subtitle,
+  soft = false,
   children,
 }: {
   id: string;
   label: string;
   title: string;
+  subtitle?: string;
+  soft?: boolean;
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-20 sm:py-28">
+    <section
+      id={id}
+      className={`scroll-mt-20 py-20 sm:py-28 ${
+        soft ? "border-y border-line bg-soft" : ""
+      }`}
+    >
       <div className="mx-auto w-full max-w-content px-6">
-        <Reveal>
+        <Reveal className="mx-auto flex max-w-2xl flex-col items-center text-center">
           <p className="section-label">{label}</p>
-          <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
             {title}
           </h2>
-          <div className="mt-6 h-px w-full bg-line" />
+          <span className="mt-5 h-px w-16 bg-gold" />
+          {subtitle && <p className="mt-5 text-muted">{subtitle}</p>}
         </Reveal>
-        <div className="mt-10">{children}</div>
+        <div className="mt-14">{children}</div>
       </div>
     </section>
   );

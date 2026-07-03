@@ -3,50 +3,81 @@ import Reveal from "./Reveal";
 
 export default function Contact() {
   return (
-    <section id="contact" className="scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto w-full max-w-content px-6">
+    <section id="contact" className="scroll-mt-20 px-6 py-20 sm:py-28">
+      <div className="mx-auto w-full max-w-content">
         <Reveal>
-          <div className="overflow-hidden rounded-3xl border border-line bg-surface p-10 sm:p-16">
-            <p className="section-label">Liên hệ</p>
-            <h2 className="mt-4 max-w-2xl font-serif text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
-              Cùng tạo nên sản phẩm số ý nghĩa.
+          <div
+            className="relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center shadow-soft sm:px-16 sm:py-24"
+            style={{
+              background:
+                "linear-gradient(150deg, #2c3a2b 0%, #394b38 55%, #46583f 100%)",
+            }}
+          >
+            {/* gold accents */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full opacity-20 blur-2xl"
+              style={{ background: "var(--gold)" }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-10 top-10 h-20 w-20 rounded-full border border-gold/40"
+            />
+
+            <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-gold">
+              Liên hệ
+            </p>
+            <h2 className="relative mx-auto mt-5 max-w-2xl font-serif text-4xl font-semibold leading-tight tracking-tight text-paper sm:text-5xl">
+              Hãy cùng tạo nên điều{" "}
+              <span className="italic text-gold">ý nghĩa</span>
             </h2>
-            <p className="mt-5 max-w-xl text-lg text-muted">
-              Mình đang mở với các cơ hội hợp tác và dự án thiết kế mới. Cứ nhắn
-              cho mình một lời chào nhé!
+            <p className="relative mx-auto mt-5 max-w-xl leading-relaxed text-paper/80">
+              Mình luôn sẵn sàng cho những dự án mới, ý tưởng sáng tạo và cơ hội
+              hợp tác. Cứ nhắn cho mình một lời chào nhé!
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="relative mt-10 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={`mailto:${profile.email}`}
-                className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:-translate-y-0.5"
               >
+                <span aria-hidden>✉️</span>
                 {profile.email}
               </a>
               <a
                 href={`tel:${profile.phone}`}
-                className="rounded-full border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-full border border-paper/40 px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
               >
+                <span aria-hidden>📞</span>
                 {profile.phone}
               </a>
+            </div>
+
+            <div className="relative mt-8 flex items-center justify-center gap-3">
               <a
                 href={profile.behance.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+                aria-label="Behance"
+                className="grid h-11 w-11 place-items-center rounded-full bg-paper/15 font-serif text-sm font-bold text-paper transition-colors hover:bg-paper/30"
               >
-                Behance {profile.behance.label}
+                Bē
               </a>
+              <span className="text-sm text-paper/70">
+                {profile.behance.label}
+              </span>
             </div>
-
-            <p className="mt-8 text-sm text-faint">{profile.location}</p>
           </div>
         </Reveal>
 
-        <footer className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-line pt-8 text-sm text-faint sm:flex-row">
-          <span className="font-serif text-base text-ink">
-            {profile.name}
-            <span className="text-accent">.</span>
+        <footer className="mt-12 flex flex-col items-center justify-between gap-4 text-sm text-faint sm:flex-row">
+          <span className="flex items-center gap-2.5 text-ink">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-accent font-serif text-xs font-bold text-paper">
+              MA
+            </span>
+            <span className="font-serif text-base font-semibold">
+              {profile.name}
+            </span>
           </span>
           <span>© {new Date().getFullYear()} · Thiết kế & xây dựng bằng Next.js</span>
         </footer>

@@ -12,7 +12,8 @@ const sans = Be_Vietnam_Pro({
 
 const serif = Playfair_Display({
   subsets: ["latin", "vietnamese"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: `${profile.name} — ${profile.role}`,
   description: profile.intro,
   keywords: [
-    "UX/UI Designer",
+    "UI/UX Designer",
     "Portfolio",
     "Tran Thi Mai An",
     "Zalo Mini App",

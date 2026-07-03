@@ -3,62 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --paper: #f4f6f2;
-  --surface: #ffffff;
-  --ink: #14201b;
-  --muted: #55625a;
-  --faint: #8b958c;
-  --line: #e3e8df;
-  --accent: #1f6f5c;
-  --accent-ink: #175a4a;
-  --accent-soft: #e6f1ec;
-  --gold: #a97b32;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0e1512;
-    --surface: #16201b;
-    --ink: #e9eee8;
-    --muted: #a0aaa0;
-    --faint: #6d776e;
-    --line: #26302a;
-    --accent: #52bb9d;
-    --accent-ink: #82d2ba;
-    --accent-soft: #14241e;
-    --gold: #cb9d55;
-  }
-}
-
-:root[data-theme="light"] {
-  --paper: #f4f6f2;
-  --surface: #ffffff;
-  --ink: #14201b;
-  --muted: #55625a;
-  --faint: #8b958c;
-  --line: #e3e8df;
-  --accent: #1f6f5c;
-  --accent-ink: #175a4a;
-  --accent-soft: #e6f1ec;
-  --gold: #a97b32;
-}
-
-:root[data-theme="dark"] {
-  --paper: #0e1512;
-  --surface: #16201b;
-  --ink: #e9eee8;
-  --muted: #a0aaa0;
-  --faint: #6d776e;
-  --line: #26302a;
-  --accent: #52bb9d;
-  --accent-ink: #82d2ba;
-  --accent-soft: #14241e;
-  --gold: #cb9d55;
+  --paper: #f5f1e5; /* cream */
+  --surface: #fffdf7; /* warm white cards */
+  --soft: #e7ede0; /* pale sage band for alt sections */
+  --ink: #2a332a; /* green-charcoal text */
+  --muted: #67705f;
+  --faint: #9a9683;
+  --line: #e6ddc8;
+  --accent: #394b38; /* primary forest green */
+  --accent-ink: #2c3a2b;
+  --accent-soft: #e4e9de;
+  --gold: #f0af44; /* secondary amber */
+  --gold-deep: #bd7f1f; /* legible gold for small text on cream */
+  --gold-soft: #f9edd3;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 88px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -74,20 +36,45 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
 }
 
 .section-label {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--gold-deep);
   font-weight: 600;
 }
 
-/* thin decorative rule */
-.hairline {
-  height: 1px;
-  background: linear-gradient(to right, var(--line), transparent);
+/* elegant arch frame: fully rounded top corners */
+.arch {
+  border-radius: 999px 999px 1.5rem 1.5rem;
+}
+
+/* thin gold divider */
+.gold-rule {
+  height: 2px;
+  width: 3.5rem;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-floaty {
+  animation: floaty 6.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty {
+    animation: none;
+  }
 }

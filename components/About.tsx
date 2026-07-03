@@ -1,40 +1,65 @@
-import { education, profile } from "@/lib/data";
-import Section from "./Section";
+import Image from "next/image";
+import { badges, profile } from "@/lib/data";
 import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    <Section id="about" label="Giới thiệu" title="Về mình">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
+    <section
+      id="about"
+      className="scroll-mt-20 border-y border-line bg-soft py-20 sm:py-28"
+    >
+      <div className="mx-auto grid w-full max-w-content grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
+        {/* arch photo placeholder */}
         <Reveal>
-          <p className="text-lg leading-relaxed text-muted">{profile.intro}</p>
-          <p className="mt-6 text-lg leading-relaxed text-muted">
-            Mình quan tâm đến cách <span className="text-ink">thiết kế</span>,{" "}
-            <span className="text-ink">công nghệ</span> và{" "}
-            <span className="text-ink">nhu cầu kinh doanh</span> kết hợp với nhau
-            để tạo ra sản phẩm số thực sự hữu ích cho người dùng.
-          </p>
+          <div className="relative mx-auto w-full max-w-sm">
+            <div
+              aria-hidden
+              className="absolute -left-5 -top-5 h-24 w-24 rounded-full border-2 border-gold/50"
+            />
+            <div className="arch relative overflow-hidden border border-line bg-surface p-3 shadow-soft">
+              <div className="arch relative aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/about-portrait.jpg"
+                  alt={`${profile.name}`}
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 384px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
         </Reveal>
 
+        {/* text */}
         <Reveal delay={0.1}>
-          <h3 className="font-serif text-xl font-semibold text-ink">Học vấn</h3>
-          <ul className="mt-5 flex flex-col gap-6">
-            {education.map((e) => (
-              <li
-                key={e.school}
-                className="border-l-2 border-line pl-4 transition-colors hover:border-accent"
+          <p className="section-label">Giới thiệu</p>
+          <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
+            {profile.aboutHeadPre}{" "}
+            <span className="italic text-gold-deep">
+              {profile.aboutHeadHighlight}
+            </span>
+          </h2>
+
+          <p className="mt-7 leading-relaxed text-muted">{profile.intro}</p>
+          <p className="mt-4 leading-relaxed text-muted">{profile.intro2}</p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {badges.map((b) => (
+              <span
+                key={b.label}
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-accent-ink"
               >
-                <div className="text-xs font-medium uppercase tracking-wide text-accent">
-                  {e.period}
-                </div>
-                <div className="mt-1 font-medium text-ink">{e.school}</div>
-                <div className="text-sm text-muted">{e.program}</div>
-                <div className="text-sm text-faint">{e.place}</div>
-              </li>
+                <span aria-hidden>{b.icon}</span>
+                {b.label}
+              </span>
             ))}
-          </ul>
+          </div>
+
+          <blockquote className="mt-8 border-l-2 border-gold pl-5 font-serif text-lg italic leading-relaxed text-ink/80">
+            {profile.quote}
+          </blockquote>
         </Reveal>
       </div>
-    </Section>
+    </section>
   );
 }

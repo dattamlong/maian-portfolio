@@ -1,48 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { nav, profile } from "@/lib/data";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const solid = scrolled || open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid
-          ? "glass-nav border-b border-line"
-          : "border-b border-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex h-16 w-full max-w-content items-center justify-between px-6">
-        <a
-          href="#top"
-          className="flex items-center gap-2.5 text-ink"
-        >
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-accent font-serif text-sm font-bold text-paper">
+    <header className="fixed inset-x-0 top-4 z-50 px-4">
+      <nav className="mx-auto flex max-w-shell items-center justify-between gap-4 rounded-full border border-line bg-surface/85 py-2 pl-5 pr-2 shadow-panel backdrop-blur">
+        <a href="#top" className="flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-ink text-xs font-semibold text-paper">
             MA
           </span>
-          <span className="font-serif text-lg font-semibold tracking-tight">
+          <span className="text-sm font-semibold tracking-tight text-ink">
             Mai An
           </span>
         </a>
 
-        <ul className="hidden items-center gap-9 md:flex">
+        <ul className="hidden items-center gap-7 md:flex">
           {nav.map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
-                className="text-sm font-medium text-muted transition-colors hover:text-gold-deep"
+                className="text-sm text-muted transition-colors hover:text-ink"
               >
                 {item.label}
               </a>
@@ -53,11 +34,10 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={`mailto:${profile.email}`}
-            className="hidden rounded-full bg-accent px-5 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90 sm:inline-block"
+            className="hidden rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90 sm:inline-block"
           >
             Liên hệ
           </a>
-
           <button
             className="grid h-9 w-9 place-items-center rounded-full border border-line text-ink md:hidden"
             aria-label="Menu"
@@ -82,14 +62,14 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-line bg-paper md:hidden">
-          <ul className="mx-auto flex w-full max-w-content flex-col px-6 py-3">
+        <div className="mx-auto mt-2 max-w-shell rounded-3xl border border-line bg-surface p-3 shadow-panel md:hidden">
+          <ul className="flex flex-col">
             {nav.map((item) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   onClick={() => setOpen(false)}
-                  className="block py-2.5 text-base font-medium text-muted transition-colors hover:text-gold-deep"
+                  className="block rounded-xl px-3 py-2.5 text-sm text-muted transition-colors hover:bg-soft hover:text-ink"
                 >
                   {item.label}
                 </a>

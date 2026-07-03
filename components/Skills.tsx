@@ -1,29 +1,14 @@
 import type { IconType } from "react-icons";
 import {
-  LuPalette,
-  LuScanSearch,
-  LuPencilRuler,
-  LuMousePointerClick,
-  LuComponent,
   LuFigma,
   LuLayoutTemplate,
   LuPenTool,
   LuNotebookPen,
   LuPresentation,
   LuFileCode2,
-  LuGlobe,
 } from "react-icons/lu";
 import { languages, skills, tools } from "@/lib/data";
 import Section from "./Section";
-import Reveal from "./Reveal";
-
-const skillIcons: Record<string, IconType> = {
-  ui: LuPalette,
-  research: LuScanSearch,
-  wireframe: LuPencilRuler,
-  prototype: LuMousePointerClick,
-  system: LuComponent,
-};
 
 const toolIcons: Record<string, IconType> = {
   figma: LuFigma,
@@ -34,84 +19,60 @@ const toolIcons: Record<string, IconType> = {
   htmlcss: LuFileCode2,
 };
 
-// độ lệch dọc tạo cảm giác so le, nghệ thuật (chỉ ở màn lớn)
-const skillOffset = ["lg:mt-0", "lg:mt-14", "lg:mt-6", "lg:mt-20", "lg:mt-10"];
-const toolOffset = [
-  "lg:mt-16",
-  "lg:mt-4",
-  "lg:mt-20",
-  "lg:mt-8",
-  "lg:mt-24",
-  "lg:mt-2",
-];
-
 export default function Skills() {
   return (
     <Section
       id="skills"
-      label="Expertise"
       title="Kỹ năng & Công cụ"
       subtitle="Những kỹ năng mình rèn luyện và công cụ mình dùng để hiện thực hóa thiết kế."
     >
-      {/* skills — thẻ so le */}
-      <div className="grid grid-cols-2 items-start gap-5 sm:grid-cols-3 lg:grid-cols-5">
-        {skills.map((s, i) => {
-          const Icon = skillIcons[s.key];
-          return (
-            <Reveal key={s.key} delay={(i % 5) * 0.06} className={skillOffset[i]}>
-              <div className="glass group flex h-full flex-col items-center rounded-[1.6rem] p-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent-soft text-accent transition-colors group-hover:bg-accent group-hover:text-paper">
-                  <Icon className="h-6 w-6" strokeWidth={1.6} />
-                </span>
-                <h3 className="mt-5 font-serif text-lg font-semibold text-ink">
-                  {s.name}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted">
-                  {s.desc}
-                </p>
-              </div>
-            </Reveal>
-          );
-        })}
+      {/* numbered skills */}
+      <div className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
+        {skills.map((s, i) => (
+          <div key={s.key} className="flex gap-5">
+            <span className="text-sm font-medium tabular-nums text-faint">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h3 className="font-semibold text-ink">{s.name}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {s.desc}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* tools */}
-      <Reveal>
-        <h3 className="mt-20 text-center font-serif text-2xl font-semibold text-ink">
-          Công cụ mình sử dụng
-        </h3>
-      </Reveal>
-      <div className="mt-10 grid grid-cols-2 items-start gap-5 sm:grid-cols-3 lg:grid-cols-6">
-        {tools.map((t, i) => {
+      <h3 className="mt-10 text-sm font-semibold uppercase tracking-wide text-faint">
+        Công cụ
+      </h3>
+      <div className="mt-4 flex flex-wrap gap-2.5">
+        {tools.map((t) => {
           const Icon = toolIcons[t.key];
           return (
-            <Reveal key={t.key} delay={(i % 6) * 0.05} className={toolOffset[i]}>
-              <div className="glass group flex h-full flex-col items-center rounded-[1.6rem] p-5 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-soft text-gold-deep transition-colors group-hover:bg-gold group-hover:text-accent-ink">
-                  <Icon className="h-5 w-5" strokeWidth={1.6} />
-                </span>
-                <h4 className="mt-4 text-sm font-bold text-ink">{t.name}</h4>
-                <p className="mt-1 text-xs leading-relaxed text-muted">
-                  {t.desc}
-                </p>
-              </div>
-            </Reveal>
+            <span
+              key={t.key}
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-soft px-4 py-2 text-sm font-medium text-ink"
+            >
+              <Icon className="h-4 w-4 text-muted" strokeWidth={1.7} />
+              {t.name}
+            </span>
           );
         })}
       </div>
 
       {/* languages */}
-      <Reveal>
-        <div className="glass mx-auto mt-16 flex max-w-md items-center justify-center gap-3 rounded-full px-6 py-3.5">
-          <LuGlobe className="h-5 w-5 text-accent" strokeWidth={1.6} />
-          {languages.map((l) => (
-            <span key={l.name} className="text-sm text-muted">
-              <span className="font-semibold text-ink">{l.name}</span> —{" "}
-              {l.level}
-            </span>
-          ))}
-        </div>
-      </Reveal>
+      <h3 className="mt-8 text-sm font-semibold uppercase tracking-wide text-faint">
+        Ngôn ngữ
+      </h3>
+      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        {languages.map((l) => (
+          <span key={l.name} className="text-muted">
+            <span className="font-medium text-ink">{l.name}</span> — {l.level}
+          </span>
+        ))}
+      </div>
     </Section>
   );
 }

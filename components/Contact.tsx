@@ -1,87 +1,110 @@
+"use client";
+
+import { useState } from "react";
+import { LuMail, LuPhone } from "react-icons/lu";
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
 
 export default function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Liên hệ từ ${name || "portfolio"}`);
+    const body = encodeURIComponent(
+      `Họ tên: ${name}\nEmail: ${email}\n\n${message}`
+    );
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+  };
+
+  const field =
+    "w-full rounded-xl border border-line bg-soft px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-faint focus:border-ink";
+
   return (
-    <section id="contact" className="scroll-mt-20 px-6 py-20 sm:py-28">
-      <div className="mx-auto w-full max-w-content">
-        <Reveal>
-          <div
-            className="relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center shadow-soft sm:px-16 sm:py-24"
-            style={{
-              background:
-                "linear-gradient(150deg, #2c3a2b 0%, #394b38 55%, #46583f 100%)",
-            }}
-          >
-            {/* gold accents */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full opacity-20 blur-2xl"
-              style={{ background: "var(--gold)" }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute right-10 top-10 h-20 w-20 rounded-full border border-gold/40"
-            />
+    <section id="contact" className="scroll-mt-28">
+      <Reveal>
+        <div className="panel p-7 shadow-panel sm:p-10">
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            Cùng hiện thực hóa ý tưởng
+          </h2>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+            Mình luôn sẵn sàng cho những dự án mới, ý tưởng sáng tạo và cơ hội
+            hợp tác. Cứ để lại lời nhắn nhé!
+          </p>
 
-            <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-gold">
-              Liên hệ
-            </p>
-            <h2 className="relative mx-auto mt-5 max-w-2xl font-serif text-4xl font-semibold leading-tight tracking-tight text-paper sm:text-5xl">
-              Hãy cùng tạo nên điều{" "}
-              <span className="italic text-gold">ý nghĩa</span>
-            </h2>
-            <p className="relative mx-auto mt-5 max-w-xl leading-relaxed text-paper/80">
-              Mình luôn sẵn sàng cho những dự án mới, ý tưởng sáng tạo và cơ hội
-              hợp tác. Cứ nhắn cho mình một lời chào nhé!
-            </p>
-
-            <div className="relative mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+            {/* contact info */}
+            <div className="flex flex-col gap-3 text-sm">
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-3 text-muted transition-colors hover:text-ink"
               >
-                <span aria-hidden>✉️</span>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-soft">
+                  <LuMail className="h-4 w-4" strokeWidth={1.7} />
+                </span>
                 {profile.email}
               </a>
               <a
                 href={`tel:${profile.phone}`}
-                className="inline-flex items-center gap-2 rounded-full border border-paper/40 px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
+                className="inline-flex items-center gap-3 text-muted transition-colors hover:text-ink"
               >
-                <span aria-hidden>📞</span>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-soft">
+                  <LuPhone className="h-4 w-4" strokeWidth={1.7} />
+                </span>
                 {profile.phone}
               </a>
-            </div>
-
-            <div className="relative mt-8 flex items-center justify-center gap-3">
               <a
                 href={profile.behance.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Behance"
-                className="grid h-11 w-11 place-items-center rounded-full bg-paper/15 font-serif text-sm font-bold text-paper transition-colors hover:bg-paper/30"
+                className="inline-flex items-center gap-3 text-muted transition-colors hover:text-ink"
               >
-                Bē
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-soft text-xs font-bold">
+                  Bē
+                </span>
+                Behance {profile.behance.label}
               </a>
-              <span className="text-sm text-paper/70">
-                {profile.behance.label}
-              </span>
+              <p className="mt-2 text-faint">{profile.location}</p>
             </div>
-          </div>
-        </Reveal>
 
-        <footer className="mt-12 flex flex-col items-center justify-between gap-4 text-sm text-faint sm:flex-row">
-          <span className="flex items-center gap-2.5 text-ink">
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-accent font-serif text-xs font-bold text-paper">
-              MA
-            </span>
-            <span className="font-serif text-base font-semibold">
-              {profile.name}
-            </span>
-          </span>
-          <span>© {new Date().getFullYear()} · Thiết kế & xây dựng bằng Next.js</span>
-        </footer>
-      </div>
+            {/* form */}
+            <form onSubmit={onSubmit} className="flex flex-col gap-3">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <input
+                  className={field}
+                  placeholder="Họ và tên"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <input
+                  className={field}
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <textarea
+                className={`${field} min-h-[120px] resize-y`}
+                placeholder="Nội dung lời nhắn..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="mt-1 rounded-full bg-ink px-6 py-3 text-sm font-medium text-paper transition-opacity hover:opacity-90"
+              >
+                Gửi lời nhắn
+              </button>
+            </form>
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

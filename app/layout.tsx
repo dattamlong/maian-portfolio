@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Playfair_Display } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/data";
 
@@ -7,14 +7,6 @@ const sans = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const serif = Playfair_Display({
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
   display: "swap",
 });
 
@@ -47,7 +39,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="vi" className={sans.variable}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

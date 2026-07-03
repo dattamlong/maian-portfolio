@@ -9,6 +9,10 @@ export const profile = {
   role: "UI/UX Designer",
   tagline:
     "UI/UX Designer trẻ, tạo nên những trải nghiệm số đơn giản, hữu ích và có chiều sâu.",
+  heroHeadline:
+    "Mình thiết kế trải nghiệm số đơn giản, hữu ích và có chiều sâu.",
+  heroSub:
+    "UI/UX Designer với kinh nghiệm thiết kế 30+ Zalo Mini App trên nhiều lĩnh vực — từ nghiên cứu người dùng đến xây dựng Design System.",
   aboutHeadPre: "Đam mê tạo ra",
   aboutHeadHighlight: "trải nghiệm có ý nghĩa",
   intro:
@@ -26,6 +30,16 @@ export const profile = {
   },
   cvUrl: "#", // TODO: thay bằng link CV PDF (Drive/Figma) khi có
 };
+
+export const brands = [
+  "FPT Shop",
+  "Panasonic",
+  "Masan",
+  "Ajinomoto",
+  "Hanotour",
+  "KDI Education",
+  "Nam Du Invest",
+];
 
 export const stats = [
   { value: "30+", label: "Zalo Mini App" },

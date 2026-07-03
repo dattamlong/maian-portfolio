@@ -39,30 +39,22 @@ export default function About() {
         />
       </div>
 
-      {/* cover image — clean wipe + zoom reveal */}
+      {/* cover image — gentle rise */}
       <motion.div
-        initial={{ clipPath: "inset(0 100% 0 0)" }}
-        whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.1, ease }}
+        transition={{ duration: 0.7, ease }}
         className="relative mb-12 aspect-[16/9] w-full overflow-hidden"
       >
-        <motion.div
-          initial={{ scale: 1.2 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.6, ease }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/about-cover.jpg"
-            alt={profile.name}
-            fill
-            quality={90}
-            sizes="100vw"
-            className="object-cover object-[50%_78%]"
-          />
-        </motion.div>
+        <Image
+          src="/about-cover.jpg"
+          alt={profile.name}
+          fill
+          quality={90}
+          sizes="100vw"
+          className="object-cover object-[50%_78%]"
+        />
       </motion.div>
 
       {/* text — staggered rise */}

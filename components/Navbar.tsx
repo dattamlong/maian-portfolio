@@ -7,18 +7,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 px-4">
-      <nav className="mx-auto flex max-w-shell items-center justify-between gap-4 rounded-full border border-line bg-surface/85 py-2 pl-5 pr-2 shadow-panel backdrop-blur">
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-full bg-ink text-xs font-semibold text-paper">
-            MA
-          </span>
-          <span className="text-sm font-semibold tracking-tight text-ink">
-            Mai An
-          </span>
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur">
+      <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+        <a href="#top" className="text-base font-semibold tracking-tight text-ink">
+          Mai An<span className="text-accent">.</span>
         </a>
 
-        <ul className="hidden items-center gap-7 md:flex">
+        <ul className="hidden items-center gap-8 md:flex">
           {nav.map((item) => (
             <li key={item.id}>
               <a
@@ -34,7 +29,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={`mailto:${profile.email}`}
-            className="hidden rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90 sm:inline-block"
+            className="hidden text-sm font-medium text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink sm:inline-block"
           >
             Liên hệ
           </a>
@@ -62,14 +57,14 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-shell rounded-3xl border border-line bg-surface p-3 shadow-panel md:hidden">
-          <ul className="flex flex-col">
+        <div className="border-t border-line bg-paper md:hidden">
+          <ul className="mx-auto flex max-w-5xl flex-col px-6 py-2">
             {nav.map((item) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-3 py-2.5 text-sm text-muted transition-colors hover:bg-soft hover:text-ink"
+                  className="block py-2.5 text-sm text-muted transition-colors hover:text-ink"
                 >
                   {item.label}
                 </a>

@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --paper: #eceae6; /* page background (light neutral) */
-  --surface: #ffffff; /* panels */
-  --soft: #f4f3f0; /* nested light blocks */
-  --ink: #1b1b19; /* near-black text */
-  --muted: #6c6b66;
-  --faint: #9c9a94;
-  --line: #e6e4df;
-  --accent: #34785a; /* subtle green accent */
-  --accent-soft: #e7f0ea;
+  --paper: #ffffff; /* open white page */
+  --surface: #ffffff;
+  --soft: #f4f4f3; /* thumbnails / chips */
+  --ink: #18181b; /* near-black */
+  --muted: #67676e;
+  --faint: #a1a1aa;
+  --line: #ececeb;
+  --accent: #2f6b4f; /* subtle green accent */
+  --accent-soft: #e8f0ea;
 }
 
 html {
@@ -35,8 +35,26 @@ body {
   color: var(--paper);
 }
 
-.panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 1.75rem;
+/* marquee for brand strip */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+  }
 }

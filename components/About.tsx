@@ -1,25 +1,19 @@
 import { LuMail, LuPhone, LuDownload } from "react-icons/lu";
 import { profile, stats } from "@/lib/data";
-import Reveal from "./Reveal";
+import Section from "./Section";
 
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-28">
-      <Reveal>
-        <div className="panel p-7 shadow-panel sm:p-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            Về mình
-          </h2>
-
-          <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-ink/90">
-            Chào bạn, mình là <strong>Tran Thi Mai An</strong> — UI/UX Designer
-            hướng sản phẩm. {profile.intro}
+    <Section id="about" title="Về mình">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr]">
+        <div>
+          <p className="max-w-xl text-lg leading-relaxed text-ink/90">
+            {profile.intro}
           </p>
-          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+          <p className="mt-4 max-w-xl leading-relaxed text-muted">
             {profile.intro2}
           </p>
 
-          {/* contact row */}
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <a
               href={`mailto:${profile.email}`}
@@ -43,9 +37,11 @@ export default function About() {
               Tải CV
             </a>
           </div>
+        </div>
 
-          {/* stats */}
-          <div className="mt-9 grid grid-cols-2 gap-6 border-t border-line pt-8 sm:grid-cols-4">
+        {/* stats + education */}
+        <div>
+          <div className="grid grid-cols-2 gap-6">
             {stats.map((s) => (
               <div key={s.label}>
                 <div className="text-3xl font-semibold tracking-tight text-ink">
@@ -58,7 +54,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </Reveal>
-    </section>
+      </div>
+    </Section>
   );
 }

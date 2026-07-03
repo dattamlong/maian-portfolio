@@ -13,19 +13,19 @@ export default function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-28">
+    <section id={id} className="scroll-mt-24 py-16 sm:py-24">
       <Reveal>
-        <div className="panel p-7 shadow-panel sm:p-10">
-          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-[2rem]">
             {title}
           </h2>
           {subtitle && (
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+            <p className="max-w-xl text-[15px] leading-relaxed text-muted">
               {subtitle}
             </p>
           )}
-          <div className="mt-8">{children}</div>
         </div>
+        <div className="mt-10">{children}</div>
       </Reveal>
     </section>
   );

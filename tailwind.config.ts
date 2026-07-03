@@ -16,16 +16,15 @@ const config: Config = {
         faint: "var(--faint)",
         line: "var(--line)",
         accent: "var(--accent)",
-        "accent-soft": "var(--accent-soft)",
+        "accent-ink": "var(--accent-ink)",
+        purple: "var(--purple)",
       },
       fontFamily: {
+        serif: ["var(--font-serif)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        shell: "60rem",
-      },
-      boxShadow: {
-        panel: "0 1px 2px rgba(27,27,25,0.04), 0 12px 32px -20px rgba(27,27,25,0.18)",
+        shell: "1600px",
       },
     },
   },

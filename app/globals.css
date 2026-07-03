@@ -3,20 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --paper: #ffffff; /* open white page */
+  --paper: #ffffff;
   --surface: #ffffff;
-  --soft: #f4f4f3; /* thumbnails / chips */
-  --ink: #18181b; /* near-black */
-  --muted: #67676e;
-  --faint: #a1a1aa;
-  --line: #ececeb;
-  --accent: #2f6b4f; /* subtle green accent */
-  --accent-soft: #e8f0ea;
+  --soft: #f5f5f4;
+  --ink: #0a0a14; /* dark navy-black */
+  --muted: #666673;
+  --faint: #999999;
+  --line: #eeeeee;
+  --accent: #de0f66; /* signature pink */
+  --accent-ink: #af0c48;
+  --purple: #5a08ea;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 100px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,30 +32,19 @@ body {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--accent);
+  color: #fff;
 }
 
-/* marquee for brand strip */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.link-pink {
+  color: var(--accent);
+  transition: color 0.2s ease;
 }
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 26s linear infinite;
+.link-pink:hover {
+  color: var(--accent-ink);
 }
-.marquee-mask:hover .marquee-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-    flex-wrap: wrap;
-  }
+
+/* gradient logo/text mark */
+.grad {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
 }

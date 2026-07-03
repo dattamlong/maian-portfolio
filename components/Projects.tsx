@@ -1,84 +1,153 @@
+"use client";
+
 import Image from "next/image";
-import { LuArrowUpRight } from "react-icons/lu";
+import { motion } from "framer-motion";
 import { featuredProjects, personalProjects, type Project } from "@/lib/data";
 import Section from "./Section";
 import Reveal from "./Reveal";
 
-function Thumb({ p }: { p: Project }) {
-  return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-soft">
-      {p.image ? (
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const grid = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.14 } },
+};
+const cardV = {
+  hidden: { opacity: 0, y: 80, scale: 0.9, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.85, ease },
+  },
+};
+
+const screens = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+};
+const screenV = {
+  hidden: { scaleY: 0, opacity: 0 },
+  show: {
+    scaleY: 1,
+    opacity: 1,
+    transition: { duration: 0.7, ease },
+  },
+};
+
+function Preview({ p }: { p: Project }) {
+  if (p.image) {
+    return (
+      <motion.div
+        initial={{ y: 50, opacity: 0, scale: 1.12 }}
+        whileInView={{ y: 0, opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.9, ease, delay: 0.25 }}
+        className="absolute inset-x-8 bottom-0 top-0 overflow-hidden rounded-t-xl shadow-[0_18px_40px_-18px_rgba(10,10,20,0.4)] sm:inset-x-10"
+      >
         <Image
           src={p.image}
           alt={p.name}
           fill
-          sizes="(max-width: 768px) 100vw, 460px"
-          className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+          sizes="(max-width: 768px) 100vw, 560px"
+          className="object-cover object-top transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
         />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
-          <span className="text-sm font-medium uppercase tracking-widest text-faint">
-            {p.category}
-          </span>
-        </div>
-      )}
-    </div>
+      </motion.div>
+    );
+  }
+  return (
+    <motion.div
+      variants={screens}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+      className="absolute inset-x-0 bottom-0 top-0 flex items-end justify-center gap-3 px-8 sm:px-10"
+    >
+      <motion.div
+        variants={screenV}
+        className="h-[62%] w-1/4 origin-bottom rounded-t-xl bg-white/85 shadow-lg transition-transform duration-500 group-hover:-translate-y-1"
+      />
+      <motion.div
+        variants={screenV}
+        className="h-[86%] w-1/3 origin-bottom rounded-t-xl bg-white shadow-xl transition-transform duration-500 group-hover:-translate-y-1.5"
+      />
+      <motion.div
+        variants={screenV}
+        className="h-[62%] w-1/4 origin-bottom rounded-t-xl bg-white/75 shadow-lg transition-transform duration-500 group-hover:-translate-y-1"
+      />
+    </motion.div>
+  );
+}
+
+function Card({ p }: { p: Project }) {
+  return (
+    <motion.article
+      variants={cardV}
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group relative flex min-h-[500px] flex-col overflow-hidden rounded-2xl sm:min-h-[600px]"
+      style={{ backgroundColor: p.tint }}
+    >
+      <div className="relative z-10 px-8 pt-9 sm:px-10 sm:pt-11">
+        <h3 className="font-serif text-[1.8rem] font-extrabold leading-tight text-ink sm:text-[2.3rem]">
+          {p.name}
+        </h3>
+        <p className="mt-3 max-w-md text-[17px] font-medium leading-relaxed text-ink/80">
+          {p.description}
+        </p>
+      </div>
+      <div className="relative mt-8 flex-1">
+        <Preview p={p} />
+      </div>
+    </motion.article>
   );
 }
 
 export default function Projects() {
   return (
-    <Section
-      id="projects"
-      title="Dự án tiêu biểu"
-      subtitle="Một số sản phẩm mình đã thiết kế trong quá trình làm nghề."
-    >
-      <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2">
-        {featuredProjects.map((p, i) => (
-          <Reveal key={p.name} delay={(i % 2) * 0.08}>
-            <article className="group cursor-default">
-              <Thumb p={p} />
-              <div className="mt-4 flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-faint">
-                    {p.category}
-                  </p>
-                  <h3 className="mt-1 text-lg font-semibold text-ink">
-                    {p.name}
-                  </h3>
-                </div>
-                <LuArrowUpRight className="mt-1 h-5 w-5 flex-none text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {p.description}
-              </p>
-            </article>
-          </Reveal>
-        ))}
-      </div>
-
-      {/* personal projects */}
-      <div className="mt-16">
-        <h3 className="text-lg font-semibold text-ink">Dự án cá nhân</h3>
-        <p className="mt-1 text-sm text-muted">
-          Những sản phẩm mình tự khởi xướng và thiết kế từ đầu (2024 – 2025).
-        </p>
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {personalProjects.map((p, i) => (
-            <Reveal key={p.name} delay={(i % 3) * 0.08}>
-              <div className="h-full rounded-2xl border border-line p-5 transition-colors hover:bg-soft">
-                <p className="text-xs font-medium uppercase tracking-wide text-faint">
-                  {p.category}
-                </p>
-                <h4 className="mt-1 font-semibold text-ink">{p.name}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {p.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+    <Section id="projects">
+      <Reveal>
+        <div className="mb-6 flex items-center gap-5">
+          <h3 className="font-serif text-2xl font-bold text-ink sm:text-[1.9rem]">
+            Featured Projects
+          </h3>
+          <span className="h-px flex-1 bg-line" />
+          <span className="text-sm text-faint">2025 – Present</span>
         </div>
-      </div>
+      </Reveal>
+      <motion.div
+        variants={grid}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-120px" }}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      >
+        {featuredProjects.map((p) => (
+          <Card key={p.name} p={p} />
+        ))}
+      </motion.div>
+
+      <Reveal>
+        <div className="mb-6 mt-16 flex items-center gap-5">
+          <h3 className="font-serif text-2xl font-bold text-ink sm:text-[1.9rem]">
+            Personal Projects
+          </h3>
+          <span className="h-px flex-1 bg-line" />
+          <span className="text-sm text-faint">2024 – 2025</span>
+        </div>
+      </Reveal>
+      <motion.div
+        variants={grid}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-120px" }}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      >
+        {personalProjects.map((p) => (
+          <Card key={p.name} p={p} />
+        ))}
+      </motion.div>
     </Section>
   );
 }

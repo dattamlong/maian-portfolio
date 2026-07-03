@@ -23,8 +23,8 @@ export default function Skills() {
   return (
     <Section
       id="skills"
-      title="Kỹ năng & Công cụ"
-      subtitle="Những kỹ năng mình rèn luyện và công cụ mình dùng để hiện thực hóa thiết kế."
+      title="Skills & Tools"
+      subtitle="The skills I've developed and the tools I use to bring designs to life."
     >
       {/* numbered skills */}
       <div className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
@@ -45,7 +45,7 @@ export default function Skills() {
 
       {/* tools */}
       <h3 className="mt-10 text-sm font-semibold uppercase tracking-wide text-faint">
-        Công cụ
+        Tools
       </h3>
       <div className="mt-4 flex flex-wrap gap-2.5">
         {tools.map((t) => {
@@ -64,7 +64,7 @@ export default function Skills() {
 
       {/* languages */}
       <h3 className="mt-8 text-sm font-semibold uppercase tracking-wide text-faint">
-        Ngôn ngữ
+        Languages
       </h3>
       <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
         {languages.map((l) => (

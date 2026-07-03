@@ -5,8 +5,8 @@ export default function Experience() {
   return (
     <Section
       id="experience"
-      title="Kinh nghiệm"
-      subtitle="Hành trình làm nghề và những gì mình đã đóng góp."
+      title="Experience"
+      subtitle="My journey and what I've contributed along the way."
     >
       <div className="flex flex-col gap-10">
         {experience.map((job) => (
@@ -19,7 +19,7 @@ export default function Experience() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
+                <span className="rounded-full bg-soft px-3 py-1 text-xs font-medium text-accent">
                   {job.type}
                 </span>
                 <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
